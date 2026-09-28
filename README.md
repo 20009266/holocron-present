@@ -3,18 +3,15 @@
 Site statique (HTML/CSS/JS, sans dépendance ni build) présentant la finalité
 opérationnelle de Holocron : suivre l'application des recommandations
 techniques, produit par produit, grâce à des collectors ciblés et des statuts
-consolidés. Dans la section Pourquoi (01), elle rassemble les bénéfices et le
-changement de modèle entre traitement des demandes et transmission du savoir.
-Elle explique aussi l'évolution de méthode nécessaire pour transformer
-le savoir des experts en compétences d'agents partagées avec les utilisateurs
-de la solution. Elle présente aussi OPIK comme brique d'observabilité pour
-tracer et évaluer les réponses du LLM, comparer les versions de Skills/prompts
-et les améliorer à partir de cas de référence, ainsi que trois exemples
-d'utilisation (IaC/résilience, monitoring et préparation SLB). La section Web UI
-présente le reporting opérationnel destiné aux Globals, avec un suivi par
-plateforme (dont GTDP), domaine et produit. Une invitation à contribuer renvoie
-au dépôt GitHub `holocron-agents`. Le schéma d'architecture source est embarqué
-dans `assets/holocron-archi.png`.
+consolidés. Le parcours est volontairement simple : pourquoi changer, comment
+les équipes transmettent leur savoir sous forme de Skills et prompts, comment
+Holocron fournit le contexte réel des produits, comment le Web UI rend le suivi
+lisible, puis trois exemples d'utilisation. OPIK s'inscrit dans la boucle de
+test et d'amélioration des réponses, avec les retours utilisateurs et les cas
+de référence. Le reporting suit les statuts par plateforme (dont GTDP), domaine
+et produit. Une invitation à contribuer renvoie au dépôt GitHub
+`holocron-agents`; le schéma technique facultatif est dans
+`assets/holocron-archi.png`.
 
 ## Structure
 

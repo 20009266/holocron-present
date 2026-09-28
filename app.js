@@ -42,7 +42,7 @@
         ".method-intro, .method-step, .change-support, .agent-repo, " +
         ".operational-model article, .architecture-diagram, .inference-note, " +
         ".reporting-intro, .reporting-level, .reporting-principle, " +
-        ".quality-step, .quality-measures, .usecase, .closing-statement"
+        ".usecase"
     );
 
     if ("IntersectionObserver" in window) {

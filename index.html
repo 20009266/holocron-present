@@ -4,11 +4,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#192b4a">
-    <meta name="description" content="Holocron transforme l'expertise opérationnelle en compétences d'agents partagées et donne aux Globals une vision du suivi des recommandations par plateforme, domaine et produit.">
+    <meta name="description" content="Holocron aide les équipes opérationnelles à partager leur expertise, suivre les recommandations produit par produit et agir avec des agents contextualisés.">
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <title>Holocron · Quand l’expertise devient scalable</title>
-    <link rel="stylesheet" href="./styles.css?v=20260928k-present">
-    <script src="./app.js?v=20260928g-present" defer></script>
+    <link rel="stylesheet" href="./styles.css?v=20260928m-present">
+    <script src="./app.js?v=20260928h-present" defer></script>
 </head>
 <body class="present-page">
     <div class="bg-glow" aria-hidden="true"></div>
@@ -21,13 +21,11 @@
                 <span class="brand-caption">PRÉSENTATION</span>
             </a>
             <nav class="topbar-nav" aria-label="Navigation de la présentation">
-                <a href="#vision">Vision</a>
-                <a href="#methode">Nouvelle méthode</a>
-                <a href="#transformation">Changement de modèle</a>
+                <a href="#pourquoi">Pourquoi</a>
+                <a href="#methode">Méthode</a>
+                <a href="#idee">Holocron</a>
                 <a href="#reporting">Reporting</a>
-                <a href="#architecture">Architecture</a>
                 <a href="#exemples">Exemples</a>
-                <a href="#qualite-ia">Qualité IA</a>
             </nav>
         </header>
 
@@ -38,10 +36,9 @@
                     <p class="eyebrow">HOLOCRON / OPÉRATIONS CLOUD AUGMENTÉES</p>
                     <h1 id="heroTitle">Quand l’expertise devient<br>scalable.</h1>
                     <p class="hero-lead">
-                        Holocron accompagne toutes les équipes opérations dans le suivi
-                        des recommandations, de la <strong>plateforme au produit</strong>. Les experts
-                        transmettent leur savoir-faire à des agents spécialisés; les collectors établissent
-                        les faits, et le Web UI rend les priorités lisibles pour tous.
+                        Holocron aide les équipes opérationnelles à <strong>partager leurs méthodes</strong>,
+                        suivre les recommandations et agir avec des agents qui disposent d'informations
+                        fiables sur chaque produit.
                     </p>
                     <div class="hero-actions">
                         <a class="button button-accent" href="#methode">
@@ -85,7 +82,12 @@
                         <p class="section-kicker">01 / POURQUOI</p>
                         <h2 id="whyTitle">Pourquoi mettre Holocron en place&nbsp;?</h2>
                     </div>
-                    <p class="section-lead">Holocron capitalise l'expertise, réduit les tâches répétitives et donne aux équipes une capacité de suivi qui accompagne la croissance du parc.</p>
+                    <p class="section-lead">Les mêmes demandes reviennent; les traiter manuellement, une à une, mobilise l'expertise sans toujours la rendre réutilisable.</p>
+                </div>
+
+                <div class="why-context">
+                    <span>LE CONSTAT</span>
+                    <p>Aujourd'hui, un expert reçoit une demande, recherche les informations, réalise l'analyse et transmet sa réponse. La prochaine équipe peut devoir recommencer. Holocron transforme cette expérience répétée en méthode partagée, puis en suivi visible.</p>
                 </div>
 
                 <div class="value-grid">
@@ -156,100 +158,83 @@
             <section class="section method-section" id="methode" aria-labelledby="methodTitle">
                 <div class="section-heading">
                     <div>
-                        <p class="section-kicker">02 / AI-NATIVE ENGINEERING</p>
+                        <p class="section-kicker">02 / NOUVELLE MÉTHODE</p>
                         <h2 id="methodTitle">Transmettre le savoir pour le rendre partageable</h2>
                     </div>
-                    <p class="section-lead">Le nouveau fonctionnement commence par une nouvelle méthode de travail&nbsp;: concevoir les opérations avec l'IA comme partenaire, et transformer l'expertise métier en compétences accessibles dans la solution.</p>
+                    <p class="section-lead">C'est le principe de l'AI-Native Engineering : les opérations sont conçues avec l'IA comme partenaire, et l'expertise métier devient une compétence réutilisable.</p>
                 </div>
 
-                <p class="method-intro">Au lieu de traiter chaque demande une par une, l'expert <strong>développe la compétence d'un agent</strong>. Les Skills et prompts explicitent sa méthode, ses contrôles et ses limites; l'équipe les teste et les améliore, puis les utilisateurs autorisés peuvent les mobiliser.</p>
+                <p class="method-intro">Un <strong>Skill</strong> décrit une méthode métier et ses étapes. Un <strong>prompt</strong> précise la demande et le résultat attendu. Ensemble, ils apprennent à l'agent comment appliquer un savoir-faire défini par l'équipe.</p>
 
                 <div class="method-flow">
                     <article class="method-step">
-                        <span class="method-index">01 / TRANSMETTRE</span>
-                        <h3>L'expert formalise sa méthode</h3>
-                        <p>Ses connaissances deviennent des instructions, des contrôles, des limites et des critères de résultat pour un Skill et son prompt.</p>
+                        <span class="method-index">01 / FORMALISER</span>
+                        <h3>L'expert explique sa méthode</h3>
+                        <p>Les demandes récurrentes et les recommandations deviennent des Skills et prompts, avec des étapes, des règles et des limites compréhensibles.</p>
                     </article>
                     <span class="method-arrow" aria-hidden="true">→</span>
                     <article class="method-step method-step-evaluate">
-                        <span class="method-index">02 / ENTRETENIR</span>
-                        <h3>L'équipe teste, utilise et améliore</h3>
-                        <p>Elle observe les réponses, exploite les retours utilisateurs et les analyses de précision, les confronte à des cas de référence, puis fait évoluer les compétences partagées.</p>
+                        <span class="method-index">02 / UTILISER</span>
+                        <h3>Les équipes mobilisent l'agent</h3>
+                        <p>Les utilisateurs autorisés sollicitent les compétences partagées pour leurs besoins opérationnels, sans repartir de zéro à chaque fois.</p>
                     </article>
                     <span class="method-arrow" aria-hidden="true">→</span>
                     <article class="method-step method-step-share">
-                        <span class="method-index">03 / PARTAGER</span>
-                        <h3>Les utilisateurs mobilisent la compétence</h3>
-                        <p>Depuis la solution, les utilisateurs autorisés accèdent au savoir-faire sans dépendre systématiquement de la disponibilité de son expert.</p>
+                        <span class="method-index">03 / AMÉLIORER</span>
+                        <h3>L'équipe apprend des usages</h3>
+                        <p>Les retours, les cas de référence et les traces OPIK aident à évaluer la précision des réponses, puis à améliorer les Skills et prompts.</p>
                     </article>
                 </div>
 
                 <aside class="change-support">
                     <span class="change-support-label">ACCOMPAGNEMENT AU CHANGEMENT</span>
-                    <p>Réussir cette évolution demande d'accompagner les usages&nbsp;: apprendre à formuler un besoin, comprendre les limites de l'agent, relire ses réponses et partager les retours. L'IA amplifie le métier; l'expertise et la décision restent humaines.</p>
+                    <p>Les utilisateurs apprennent à formuler leur besoin et à relire les réponses. Les experts gardent la responsabilité des compétences et des décisions. OPIK aide à observer et évaluer les réponses; il n'entraîne pas le modèle automatiquement.</p>
                 </aside>
             </section>
 
             <section class="section" id="idee" aria-labelledby="ideaTitle">
                 <div class="section-heading">
                     <div>
-                        <p class="section-kicker">03 / LA PROMESSE</p>
-                        <h2 id="ideaTitle">Rendre l'état opérationnel visible</h2>
+                        <p class="section-kicker">03 / HOLOCRON, LE CONTEXTE PRODUIT</p>
+                        <h2 id="ideaTitle">Donner à l'agent les faits du produit</h2>
                     </div>
-                    <p class="section-lead">Le projet donne une réponse concrète à une question centrale&nbsp;: les recommandations applicables sont-elles effectivement présentes dans chaque produit&nbsp;?</p>
+                    <p class="section-lead">Le Skill apporte la méthode. Holocron apporte les informations réelles dont l'agent a besoin pour l'appliquer.</p>
                 </div>
 
                 <div class="idea-layout">
-                    <div class="idea-copy">
-                        <p>Dans la partie opérationnelle, il ne suffit pas de définir une recommandation&nbsp;: il faut pouvoir <strong>contrôler son application dans la réalité technique du produit</strong>. Holocron accompagne le produit tout au long de son cycle de vie, depuis la création de son premier environnement jusqu'à son suivi après la mise en production. Les recommandations, les remédiations et les spécificités du produit évoluent; leur suivi doit donc rester maîtrisé dans la durée.</p>
-                        <p>Holocron organise ce suivi. Pour chaque produit et chaque contrôle, un collector adapté va chercher les informations pertinentes dans les sources concernées, identifie l'état observé et permet de le restituer de façon exploitable.</p>
-                    </div>
-                    <div class="idea-model" aria-label="Le principe du suivi opérationnel">
-                        <div><span class="model-index">01</span><span><strong>Recommandation</strong><small>le critère technique attendu pour le produit</small></span></div>
-                        <div class="model-operator" aria-hidden="true">+</div>
-                        <div><span class="model-index">02</span><span><strong>Collector ciblé</strong><small>la source et l'état du produit visé</small></span></div>
-                        <div class="model-operator" aria-hidden="true">+</div>
-                        <div><span class="model-index">03</span><span><strong>Suivi produit</strong><small>un statut opérationnel exploitable</small></span></div>
+                    <div class="idea-copy idea-copy-wide">
+                        <p>Holocron suit le produit pendant tout son cycle de vie, <strong>du premier environnement jusqu'à l'exploitation</strong>. Des collectors ciblés vérifient les exigences et recommandations à partir des sources qui décrivent réellement le produit.</p>
+                        <p>Les constats sont centralisés, puis rendus accessibles par API. L'agent peut alors analyser l'état du produit, préparer un rapport ou proposer une remédiation à valider par l'équipe.</p>
                     </div>
                 </div>
 
-                <p class="idea-conclusion">Holocron relie ce qui devrait être en place à ce qui est effectivement détecté sur chaque produit.</p>
-            </section>
-
-            <section class="section architecture-section" id="architecture" aria-labelledby="archTitle">
-                <div class="section-heading">
-                    <div>
-                        <p class="section-kicker">04 / FONCTIONNEMENT TECHNIQUE</p>
-                        <h2 id="archTitle">Du besoin opérationnel au statut produit</h2>
-                    </div>
-                    <p class="section-lead">Le schéma présente les briques qui rendent ce suivi possible. La finalité reste métier&nbsp;: observer l'état technique de chaque produit au regard des recommandations qui le concernent.</p>
-                </div>
-
-                <div class="operational-model" aria-label="Principe du suivi opérationnel Holocron">
-                    <article><span>01 / ATTENDU</span><h3>La recommandation</h3><p>Définir ce qui doit être présent ou configuré sur le produit&nbsp;: exigences de sécurité, composants et supervision.</p></article>
+                <div class="operational-model" aria-label="Le flux de suivi d'un produit">
+                    <article><span>01 / ATTENDU</span><h3>La recommandation</h3><p>Ce qui doit être conforme ou présent sur le produit.</p></article>
                     <span class="model-arrow" aria-hidden="true">→</span>
-                    <article><span>02 / OBSERVÉ</span><h3>Le collector ciblé</h3><p>Interroger les sources adaptées au produit pour détecter un état technique précis et apporter un constat vérifiable.</p></article>
+                    <article><span>02 / OBSERVÉ</span><h3>Le collector</h3><p>Ce qui est réellement détecté dans les sources ciblées.</p></article>
                     <span class="model-arrow" aria-hidden="true">→</span>
-                    <article><span>03 / SUIVI</span><h3>Le statut opérationnel</h3><p>Consolider les constats afin de suivre l'application des recommandations, produit par produit, et de repérer les écarts.</p></article>
+                    <article><span>03 / PARTAGÉ</span><h3>Le statut produit</h3><p>Un résultat disponible dans le Web UI et via l'API pour l'agent.</p></article>
                 </div>
 
-                <p class="collector-explanation">Le collector est la pièce qui transforme une attente en mesure. Il est choisi selon le contrôle et la source concernés&nbsp;: l'enjeu n'est pas de tout collecter, mais d'identifier précisément l'état utile au suivi.</p>
+                <p class="idea-conclusion">Holocron établit les faits; le Skill donne la méthode; l'équipe garde la décision.</p>
 
-                <figure class="architecture-diagram">
-                    <a class="diagram-link" href="./assets/holocron-archi.png" target="_blank" rel="noopener" aria-label="Ouvrir le schéma d'architecture Holocron en taille réelle">
-                        <img src="./assets/holocron-archi.png" alt="Schéma d'architecture Holocron. Les sources Git en lecture seule, Turbine et les datasets alimentent des collectors puis le backend, la base de données et le Web UI. Le schéma présente aussi le dépôt Git Agent Local, Agent Local OpenCode, les fonctions Audit/Report et Mediation, l'API Management, OPIK et le moteur LLM." loading="lazy" decoding="async">
-                    </a>
-                    <figcaption><span>Schéma d'architecture Holocron</span><span>Vue technique détaillée · cliquer pour agrandir</span></figcaption>
-                </figure>
-
-                <p class="inference-note"><strong>À distinguer&nbsp;:</strong> le chemin API Management → OPIK → LLM concerne l'inférence des agents. Les collectors, eux, établissent les constats techniques sur les produits.</p>
+                <details class="architecture-details">
+                    <summary>Voir le schéma technique complet</summary>
+                    <figure class="architecture-diagram">
+                        <a class="diagram-link" href="./assets/holocron-archi.png" target="_blank" rel="noopener" aria-label="Ouvrir le schéma d'architecture Holocron en taille réelle">
+                            <img src="./assets/holocron-archi.png" alt="Les sources Git en lecture seule, Turbine et les datasets alimentent les collectors, le backend, la base de données et le Web UI. L'agent local utilise les Skills du dépôt, l'API Management, OPIK et le LLM pour analyser les constats et préparer des actions." loading="lazy" decoding="async">
+                        </a>
+                        <figcaption><span>Architecture Holocron</span><span>Cliquer sur le schéma pour l'agrandir</span></figcaption>
+                    </figure>
+                    <p class="inference-note">Les collectors établissent les faits; l'agent utilise ces données avec les compétences des équipes. OPIK rend les appels au LLM observables.</p>
+                </details>
             </section>
 
             <section class="section reporting-section" id="reporting" aria-labelledby="reportingTitle">
                 <div class="section-heading">
                     <div>
-                        <p class="section-kicker">05 / WEB UI · REPORTING OPÉRATIONNEL</p>
-                        <h2 id="reportingTitle">Une vue de pilotage suffit</h2>
+                        <p class="section-kicker">04 / REPORTING</p>
+                        <h2 id="reportingTitle">Une vue de pilotage</h2>
                     </div>
                     <p class="section-lead">Le Web UI restitue clairement l'état des grandes remédiations opérationnelles demandées aux Globals, notamment sur les services de la plateforme GTDP.</p>
                 </div>
@@ -274,47 +259,10 @@
                 <aside class="reporting-principle"><strong>Le rôle du Web UI</strong><span>Transformer les résultats des collectors et du backend en reporting compréhensible, pour aider les Globals à mesurer l'avancement, prioriser les remédiations et suivre leur résolution.</span></aside>
             </section>
 
-            <section class="section quality-section" id="qualite-ia" aria-labelledby="qualityTitle">
-                <div class="section-heading">
-                    <div>
-                        <p class="section-kicker">06 / OPIK &amp; QUALITÉ IA</p>
-                        <h2 id="qualityTitle">Mesurer pour améliorer les agents</h2>
-                    </div>
-                    <p class="section-lead">Les Skills et prompts guident les agents Holocron. OPIK rend les appels au LLM observables afin d'analyser leurs réponses, comparer les versions et améliorer leur qualité.</p>
-                </div>
-
-                <ol class="quality-steps">
-                    <li class="quality-step">
-                        <span class="quality-index">01</span>
-                        <div><h3>Développer et versionner</h3><p>Les experts définissent le rôle du Skill, ses instructions, le prompt, les données attendues et le format de sortie. Chaque évolution doit être identifiable pour relier une réponse à la version qui l'a produite.</p></div>
-                    </li>
-                    <li class="quality-step">
-                        <span class="quality-index">02</span>
-                        <div><h3>Observer avec OPIK</h3><p>Les traces d'exécution permettent d'examiner le scénario, la version du Skill/prompt, les appels au modèle et les réponses produites, dans le respect des règles de confidentialité et d'accès.</p></div>
-                    </li>
-                    <li class="quality-step">
-                        <span class="quality-index">03</span>
-                        <div><h3>Évaluer sur des cas de référence</h3><p>Des situations et constats vérifiés par les experts servent à mesurer la précision des écarts signalés, le rappel des écarts connus, l'ancrage dans les données produit, la complétude et le respect des consignes.</p></div>
-                    </li>
-                    <li class="quality-step">
-                        <span class="quality-index">04</span>
-                        <div><h3>Comparer et affiner</h3><p>Les équipes analysent les erreurs et les variations de réponse, ajustent Skills et prompts, puis rejouent les mêmes cas. Une nouvelle version est retenue si elle améliore les critères attendus sans créer de régression.</p></div>
-                    </li>
-                </ol>
-
-                <div class="quality-measures">
-                    <div>
-                        <span class="quality-measures-label">EXEMPLES DE MESURES</span>
-                        <p><strong>Précision</strong>&nbsp;: parmi les écarts signalés, quelle part est confirmée&nbsp;? <strong>Rappel</strong>&nbsp;: parmi les écarts connus, quelle part est détectée&nbsp;? On complète ces mesures par la fidélité aux données, la couverture des critères et le respect du format demandé.</p>
-                    </div>
-                    <aside><strong>OPIK n'entraîne pas et ne corrige pas le LLM automatiquement.</strong> Il rend son comportement analysable. La qualité dépend des cas de test, des critères métier et de la revue des experts; un score global seul pourrait masquer des erreurs importantes.</aside>
-                </div>
-            </section>
-
             <section class="section" id="exemples" aria-labelledby="examplesTitle">
                 <div class="section-heading">
                     <div>
-                        <p class="section-kicker">07 / EXEMPLES D'UTILISATION</p>
+                        <p class="section-kicker">05 / EXEMPLES</p>
                         <h2 id="examplesTitle">Une même logique, trois besoins opérationnels</h2>
                     </div>
                     <p class="section-lead">Partir de l'état réel, le comparer aux recommandations, puis aider l'équipe à décider de la suite.</p>
