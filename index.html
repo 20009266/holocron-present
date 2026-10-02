@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Holocron · L'excellence opérationnelle augmentée par l'IA</title>
+  <meta name="description" content="Holocron, le système expert d'ADEO dédié à l'excellence opérationnelle : des agents IA qui analysent, comprennent, suggèrent et remédient." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="theme-color" content="#060a14" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            ink: { 950: '#060a14', 900: '#0b1220', 800: '#111a2e', 700: '#1a2540' },
+            holo: { 300: '#7ee7f7', 400: '#22d3ee', 500: '#06b6d4' },
+            nova: { 400: '#a78bfa', 500: '#8b5cf6' },
+            leaf: { 400: '#4ade80' },
+          },
+          keyframes: {
+            fadeUp: { '0%': { opacity: 0, transform: 'translateY(12px)' }, '100%': { opacity: 1, transform: 'translateY(0)' } },
+            pulseGlow: { '0%,100%': { opacity: .55 }, '50%': { opacity: 1 } },
+          },
+          animation: {
+            fadeUp: 'fadeUp .5s ease-out both',
+            pulseGlow: 'pulseGlow 4s ease-in-out infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body {
+      background-color: #060a14;
+      background-image:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(34, 211, 238, .14), transparent 60%),
+        radial-gradient(ellipse 60% 40% at 100% 30%, rgba(139, 92, 246, .10), transparent 60%),
+        linear-gradient(rgba(148, 163, 184, .045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 163, 184, .045) 1px, transparent 1px);
+      background-size: auto, auto, 48px 48px, 48px 48px;
+      background-attachment: fixed;
+    }
+    [data-page][hidden] { display: none !important; }
+    .text-gradient {
+      background: linear-gradient(90deg, #7ee7f7 0%, #22d3ee 40%, #a78bfa 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .glass {
+      background: linear-gradient(180deg, rgba(17, 26, 46, .78), rgba(11, 18, 32, .78));
+      border: 1px solid rgba(148, 163, 184, .12);
+      backdrop-filter: blur(10px);
+    }
+    .glow-border { position: relative; }
+    .glow-border::before {
+      content: ""; position: absolute; inset: -1px; border-radius: inherit; padding: 1px;
+      background: linear-gradient(135deg, rgba(34, 211, 238, .55), rgba(139, 92, 246, .35), transparent 70%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+    }
+    .nav-link.is-active { color: #fff; background: rgba(34, 211, 238, .12); box-shadow: inset 0 0 0 1px rgba(34, 211, 238, .35); }
+    #diagram svg { max-width: 100%; height: auto; margin: 0 auto; }
+    .ascii { font-variant-ligatures: none; line-height: 1.35; }
+  </style>
+</head>
+
+<body class="font-sans text-slate-300 antialiased selection:bg-holo-400/30 selection:text-white">
+
+  <!-- ============================== NAVIGATION ============================== -->
+  <header class="sticky top-0 z-50 border-b border-white/5 bg-ink-950/75 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-8" aria-label="Navigation principale">
+      <a href="#pourquoi" class="group flex items-center gap-3" aria-label="Holocron, accueil">
+        <span class="relative grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-holo-400 to-nova-500 shadow-lg shadow-holo-500/20">
+          <svg viewBox="0 0 24 24" class="h-5 w-5 text-ink-950" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round">
+            <path d="M12 2.5 21 7.5v9L12 21.5 3 16.5v-9L12 2.5Z" />
+            <path d="M12 12 21 7.5M12 12 3 7.5M12 12v9.5" />
+          </svg>
+        </span>
+        <span class="text-lg font-bold tracking-tight text-white">Holocron</span>
+        <span class="hidden rounded-full border border-white/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-widest text-slate-400 sm:inline">ADEO</span>
+      </a>
+
+      <ul class="hidden items-center gap-1 md:flex">
+        <li><a href="#pourquoi" data-nav="pourquoi" class="nav-link rounded-lg px-3.5 py-2 text-sm font-medium text-slate-400 transition hover:text-white">Pourquoi Holocron&nbsp;?</a></li>
+        <li><a href="#conception" data-nav="conception" class="nav-link rounded-lg px-3.5 py-2 text-sm font-medium text-slate-400 transition hover:text-white">Conception</a></li>
+        <li><a href="#contribuer" data-nav="contribuer" class="nav-link rounded-lg px-3.5 py-2 text-sm font-medium text-slate-400 transition hover:text-white">Contribuer</a></li>
+        <li><a href="#architecture" data-nav="architecture" class="nav-link rounded-lg px-3.5 py-2 text-sm font-medium text-slate-400 transition hover:text-white">Architecture</a></li>
+        <li><a href="#roadmap" data-nav="roadmap" class="nav-link rounded-lg px-3.5 py-2 text-sm font-medium text-slate-400 transition hover:text-white">Roadmap</a></li>
+      </ul>
+
+      <button id="menu-toggle" type="button" class="rounded-lg p-2 text-slate-300 hover:bg-white/5 md:hidden" aria-controls="mobile-menu" aria-expanded="false" aria-label="Ouvrir le menu">
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16" /></svg>
+      </button>
+    </nav>
+
+    <div id="mobile-menu" class="hidden border-t border-white/5 px-5 pb-4 md:hidden">
+      <ul class="flex flex-col gap-1 pt-3">
+        <li><a href="#pourquoi" data-nav="pourquoi" class="nav-link block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400">Pourquoi Holocron&nbsp;?</a></li>
+        <li><a href="#conception" data-nav="conception" class="nav-link block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400">Conception</a></li>
+        <li><a href="#contribuer" data-nav="contribuer" class="nav-link block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400">Contribuer</a></li>
+        <li><a href="#architecture" data-nav="architecture" class="nav-link block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400">Architecture</a></li>
+        <li><a href="#roadmap" data-nav="roadmap" class="nav-link block rounded-lg px-3 py-2.5 text-sm font-medium text-slate-400">Roadmap</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ===================================================================== -->
+    <!-- PAGE 1 · POURQUOI HOLOCRON ?                                           -->
+    <!-- ===================================================================== -->
+    <section data-page="pourquoi" data-title="Pourquoi Holocron ?" aria-labelledby="pourquoi-title">
+
+      <!-- Hero -->
+      <div class="relative mx-auto max-w-7xl px-5 pb-20 pt-20 lg:px-8 lg:pt-28">
+        <div class="mx-auto max-w-4xl text-center animate-fadeUp">
+          <span class="inline-flex items-center gap-2 rounded-full border border-holo-400/30 bg-holo-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-holo-300">
+            <span class="h-1.5 w-1.5 rounded-full bg-holo-400 animate-pulseGlow"></span>
+            Excellence opérationnelle · Propulsée par l'IA
+          </span>
+          <h1 id="pourquoi-title" class="mt-8 text-4xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            L'opérationnel entre dans une <span class="text-gradient">nouvelle ère.</span>
+          </h1>
+          <p class="mx-auto mt-7 max-w-2xl text-lg leading-relaxed text-slate-400 sm:text-xl">
+            Holocron est le système expert d'ADEO dédié à l'excellence opérationnelle.
+            Il transforme la connaissance de nos équipes et les données de nos services en
+            <strong class="font-semibold text-slate-200">agents IA capables d'analyser, de comprendre, de suggérer et de remédier</strong>,
+            pour que chaque produit gagne en réactivité et en efficacité.
+          </p>
+          <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a href="#conception" class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-holo-400 to-nova-500 px-6 py-3.5 text-sm font-semibold text-ink-950 shadow-lg shadow-holo-500/25 transition hover:brightness-110">
+              Découvrir la conception
+              <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            </a>
+            <a href="#contribuer" class="inline-flex items-center gap-2 rounded-xl border border-white/15 px-6 py-3.5 text-sm font-semibold text-white transition hover:border-white/30 hover:bg-white/5">
+              Contribuer dès aujourd'hui
+            </a>
+          </div>
+        </div>
+
+        <!-- Domaines couverts -->
+        <div class="mx-auto mt-16 flex max-w-4xl flex-wrap items-center justify-center gap-2.5 text-sm">
+          <span class="mr-1 text-xs font-semibold uppercase tracking-widest text-slate-500">Périmètre</span>
+          <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-300">Infrastructure</span>
+          <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-300">Environnements</span>
+          <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-300">SRE</span>
+          <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-300">Monitoring</span>
+          <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-300">Process Management</span>
+        </div>
+      </div>
+
+      <!-- Le constat -->
+      <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-widest text-holo-400">Le constat</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">Notre patrimoine technique grandit plus vite que notre capacité à le maîtriser.</h2>
+        </div>
+
+        <div class="mt-12 grid gap-5 md:grid-cols-3">
+          <article class="glass rounded-2xl p-7">
+            <div class="grid h-11 w-11 place-items-center rounded-xl bg-rose-500/10 text-rose-300">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h10.5m-10.5 5.25h6.5M17 15l4 4m0-4-4 4" /></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-white">Une connaissance éclatée</h3>
+            <p class="mt-2.5 leading-relaxed text-slate-400">Elle vit dans la tête de quelques experts, dans des runbooks oubliés, des tickets clos et une dizaine d'outils différents. Quand l'expert est absent, le savoir l'est aussi.</p>
+          </article>
+          <article class="glass rounded-2xl p-7">
+            <div class="grid h-11 w-11 place-items-center rounded-xl bg-amber-500/10 text-amber-300">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 17l6-6 4 4 8-8m0 0v6m0-6h-6" /></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-white">Une complexité croissante</h3>
+            <p class="mt-2.5 leading-relaxed text-slate-400">Multi-cloud, microservices, dépendances croisées, conformité, sécurité : chaque produit cumule des exigences qu'aucune équipe ne peut plus suivre seule, à la main.</p>
+          </article>
+          <article class="glass rounded-2xl p-7">
+            <div class="grid h-11 w-11 place-items-center rounded-xl bg-holo-400/10 text-holo-300">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2m5-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+            </div>
+            <h3 class="mt-5 text-lg font-semibold text-white">La réactivité, un enjeu métier</h3>
+            <p class="mt-2.5 leading-relaxed text-slate-400">Chaque minute d'incident se mesure en ventes perdues et en confiance entamée. Le temps passé à chercher l'information est du temps qui manque pour agir.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Le nouveau paradigme -->
+      <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+        <div class="glass glow-border overflow-hidden rounded-3xl">
+          <div class="grid lg:grid-cols-2">
+            <div class="p-8 sm:p-12">
+              <p class="text-sm font-semibold uppercase tracking-widest text-nova-400">Le nouveau paradigme</p>
+              <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">De l'opérationnel subi à l'opérationnel augmenté.</h2>
+              <p class="mt-5 text-lg leading-relaxed text-slate-400">
+                Holocron ne remplace pas nos experts : il les démultiplie. En transmettant la connaissance humaine à des agents IA,
+                nous rendons l'expertise disponible <span class="text-slate-200">partout, tout le temps, pour tous</span>.
+                L'agent prépare le terrain, l'humain décide.
+              </p>
+            </div>
+            <div class="grid gap-px bg-white/5 sm:grid-cols-2">
+              <div class="bg-ink-900/80 p-8">
+                <p class="text-xs font-semibold uppercase tracking-widest text-slate-500">Hier</p>
+                <ul class="mt-5 space-y-4 text-sm text-slate-400">
+                  <li class="flex gap-3"><span class="mt-0.5 text-rose-400">✕</span>Chercher l'information dans dix outils</li>
+                  <li class="flex gap-3"><span class="mt-0.5 text-rose-400">✕</span>Dépendre de la disponibilité d'un expert</li>
+                  <li class="flex gap-3"><span class="mt-0.5 text-rose-400">✕</span>Répéter les mêmes diagnostics</li>
+                  <li class="flex gap-3"><span class="mt-0.5 text-rose-400">✕</span>Piloter à l'intuition</li>
+                </ul>
+              </div>
+              <div class="bg-ink-900/80 p-8">
+                <p class="text-xs font-semibold uppercase tracking-widest text-holo-400">Avec Holocron</p>
+                <ul class="mt-5 space-y-4 text-sm text-slate-200">
+                  <li class="flex gap-3"><span class="mt-0.5 text-leaf-400">✓</span>Une question, un contexte complet</li>
+                  <li class="flex gap-3"><span class="mt-0.5 text-leaf-400">✓</span>L'expertise partagée et toujours disponible</li>
+                  <li class="flex gap-3"><span class="mt-0.5 text-leaf-400">✓</span>Des remédiations suggérées et tracées</li>
+                  <li class="flex gap-3"><span class="mt-0.5 text-leaf-400">✓</span>Une vision consolidée pour décider</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trois piliers -->
+      <div class="mx-auto max-w-7xl px-5 py-20 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="text-sm font-semibold uppercase tracking-widest text-holo-400">Ce que Holocron apporte</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">Un cerveau, une communauté, une vision.</h2>
+        </div>
+
+        <div class="mt-16 space-y-6">
+
+          <!-- Cerveau opérationnel -->
+          <article class="glass grid items-center gap-10 rounded-3xl p-8 sm:p-12 lg:grid-cols-5">
+            <div class="lg:col-span-3">
+              <div class="flex items-center gap-3">
+                <span class="grid h-11 w-11 place-items-center rounded-xl bg-holo-400/15 text-holo-300">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5" /></svg>
+                </span>
+                <h3 class="text-2xl font-bold text-white">Le Cerveau Opérationnel</h3>
+              </div>
+              <p class="mt-5 text-lg leading-relaxed text-slate-400">
+                Holocron écoute en continu l'ensemble de notre patrimoine technique : fournisseurs cloud, outils d'observabilité,
+                bases de données, microservices. Ces informations, aujourd'hui dispersées, sont rassemblées et organisées dans
+                <span class="text-slate-200">une base de connaissances unique, vivante et toujours à jour</span>.
+              </p>
+              <p class="mt-4 leading-relaxed text-slate-400">
+                Résultat : les agents IA ne partent jamais d'une page blanche. Ils connaissent votre produit, son historique et ses
+                dépendances, comme le ferait votre expert le plus expérimenté.
+              </p>
+            </div>
+            <div class="lg:col-span-2">
+              <div class="rounded-2xl border border-white/10 bg-ink-950/60 p-6">
+                <div class="grid grid-cols-2 gap-3 text-sm">
+                  <div class="rounded-xl border border-white/10 bg-white/[.03] p-3 text-center text-slate-300">Providers</div>
+                  <div class="rounded-xl border border-white/10 bg-white/[.03] p-3 text-center text-slate-300">Observabilité</div>
+                  <div class="rounded-xl border border-white/10 bg-white/[.03] p-3 text-center text-slate-300">Bases de données</div>
+                  <div class="rounded-xl border border-white/10 bg-white/[.03] p-3 text-center text-slate-300">Microservices</div>
+                </div>
+                <div class="my-4 flex justify-center text-holo-400">
+                  <svg class="h-6 w-6 animate-pulseGlow" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m0 0-6-6m6 6 6-6" /></svg>
+                </div>
+                <div class="rounded-xl border border-holo-400/40 bg-holo-400/10 p-4 text-center">
+                  <p class="font-semibold text-white">Base de connaissances</p>
+                  <p class="mt-1 text-xs text-holo-300">Le contexte partagé de tous les agents</p>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <div class="grid gap-6 lg:grid-cols-2">
+            <!-- Collaboration -->
+            <article class="glass rounded-3xl p-8 sm:p-10">
+              <div class="flex items-center gap-3">
+                <span class="grid h-11 w-11 place-items-center rounded-xl bg-nova-500/15 text-nova-400">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" /></svg>
+                </span>
+                <h3 class="text-2xl font-bold text-white">Collaboration</h3>
+              </div>
+              <p class="mt-5 text-lg leading-relaxed text-slate-400">
+                Holocron n'est pas un outil livré clé en main par une équipe isolée : <span class="text-slate-200">c'est un projet commun</span>.
+                Chacun apporte ce qu'il sait faire de mieux ; l'agent en hérite et le rend disponible à tous.
+              </p>
+              <ul class="mt-6 grid gap-3 sm:grid-cols-2">
+                <li class="rounded-xl border border-white/10 bg-white/[.03] p-4">
+                  <p class="font-semibold text-white">Responsables de services</p>
+                  <p class="mt-1 text-sm text-slate-400">Définissent les standards et les attendus.</p>
+                </li>
+                <li class="rounded-xl border border-white/10 bg-white/[.03] p-4">
+                  <p class="font-semibold text-white">Équipes transverses</p>
+                  <p class="mt-1 text-sm text-slate-400">Partagent leur expertise Infra, SRE et Sécurité.</p>
+                </li>
+                <li class="rounded-xl border border-white/10 bg-white/[.03] p-4">
+                  <p class="font-semibold text-white">Équipes Software</p>
+                  <p class="mt-1 text-sm text-slate-400">Apportent la connaissance fine des produits.</p>
+                </li>
+                <li class="rounded-xl border border-white/10 bg-white/[.03] p-4">
+                  <p class="font-semibold text-white">Ops Produit</p>
+                  <p class="mt-1 text-sm text-slate-400">Traduisent le terrain en skills concrets.</p>
+                </li>
+              </ul>
+            </article>
+
+            <!-- Pilotage -->
+            <article class="glass rounded-3xl p-8 sm:p-10">
+              <div class="flex items-center gap-3">
+                <span class="grid h-11 w-11 place-items-center rounded-xl bg-leaf-400/15 text-leaf-400">
+                  <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg>
+                </span>
+                <h3 class="text-2xl font-bold text-white">Pilotage</h3>
+              </div>
+              <p class="mt-5 text-lg leading-relaxed text-slate-400">
+                Des tableaux de bord consolidés offrent une lecture claire de l'expertise et des opérations
+                <span class="text-slate-200">à chaque niveau de l'organisation</span>. Du comité de plateforme à l'équipe produit,
+                chacun dispose de la même source de vérité pour prioriser et décider.
+              </p>
+              <div class="mt-6 space-y-3">
+                <div class="rounded-xl border border-white/10 bg-white/[.03] p-4">
+                  <div class="flex items-center justify-between">
+                    <p class="font-semibold text-white">Plateforme</p>
+                    <span class="text-xs text-slate-500">Vision stratégique</span>
+                  </div>
+                  <p class="mt-1 text-xs text-slate-400">Product · Supply · Customer · Global Tech &amp; Data · Finance &amp; HR…</p>
+                </div>
+                <div class="ml-5 rounded-xl border border-white/10 bg-white/[.03] p-4">
+                  <div class="flex items-center justify-between">
+                    <p class="font-semibold text-white">Domaine</p>
+                    <span class="text-xs text-slate-500">Vision de portefeuille</span>
+                  </div>
+                  <p class="mt-1 text-xs text-slate-400">Maturité, tendances et points d'attention par besoin business.</p>
+                </div>
+                <div class="ml-10 rounded-xl border border-leaf-400/30 bg-leaf-400/5 p-4">
+                  <div class="flex items-center justify-between">
+                    <p class="font-semibold text-white">Produit</p>
+                    <span class="text-xs text-slate-500">Vision opérationnelle</span>
+                  </div>
+                  <p class="mt-1 text-xs text-slate-400">Audits, constats et plans d'action concrets pour l'équipe.</p>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+
+      <div class="mx-auto max-w-7xl px-5 pb-20 lg:px-8">
+        <div class="flex flex-col items-center gap-4 text-center">
+          <p class="text-lg text-slate-400">Curieux de savoir comment tout cela fonctionne&nbsp;?</p>
+          <a href="#conception" class="inline-flex items-center gap-2 font-semibold text-holo-300 hover:text-holo-400">
+            Explorer la conception
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- PAGE 2 · CONCEPTION                                                     -->
+    <!-- ===================================================================== -->
+    <section data-page="conception" data-title="Conception" aria-labelledby="conception-title" hidden>
+      <div class="mx-auto max-w-7xl px-5 pb-12 pt-20 lg:px-8 lg:pt-24">
+        <div class="max-w-3xl animate-fadeUp">
+          <p class="text-sm font-semibold uppercase tracking-widest text-holo-400">Conception</p>
+          <h1 id="conception-title" class="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            Trois axes, <span class="text-gradient">une seule ambition.</span>
+          </h1>
+          <p class="mt-6 text-lg leading-relaxed text-slate-400">
+            Holocron repose sur une approche simple : <span class="text-slate-200">connaître</span> nos systèmes,
+            <span class="text-slate-200">capitaliser</span> le savoir-faire de nos équipes et <span class="text-slate-200">raisonner</span>
+            de façon fiable et mesurable. Trois briques complémentaires, conçues pour s'alimenter mutuellement.
+          </p>
+        </div>
+      </div>
+
+      <div class="mx-auto max-w-7xl px-5 pb-16 lg:px-8">
+        <div class="grid gap-6 lg:grid-cols-3">
+          <!-- Axe 1 -->
+          <article class="glass glow-border flex flex-col rounded-3xl p-8">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-sm text-holo-400">AXE 01</span>
+              <span class="grid h-11 w-11 place-items-center rounded-xl bg-holo-400/15 text-holo-300">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 5.625c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125" /></svg>
+              </span>
+            </div>
+            <h2 class="mt-6 text-2xl font-bold text-white">Le Collecteur</h2>
+            <p class="mt-1 text-sm font-medium text-holo-300">Connaître nos systèmes</p>
+            <p class="mt-5 leading-relaxed text-slate-400">
+              Le Collecteur recense en continu les données techniques, les services et l'infrastructure de chaque produit.
+              Il les normalise et les transforme en un <span class="text-slate-200">modèle de données centralisé</span> :
+              la base de connaissances sur laquelle s'appuient tous les agents.
+            </p>
+            <ul class="mt-6 space-y-2.5 text-sm text-slate-300">
+              <li class="flex gap-2.5"><span class="text-holo-400">▸</span>Inventaire des services, environnements et ressources</li>
+              <li class="flex gap-2.5"><span class="text-holo-400">▸</span>Signaux d'observabilité et de monitoring</li>
+              <li class="flex gap-2.5"><span class="text-holo-400">▸</span>Audits réguliers et constats historisés</li>
+            </ul>
+            <p class="mt-auto pt-8 text-xs uppercase tracking-widest text-slate-500">Apport · Un contexte fiable et partagé</p>
+          </article>
+
+          <!-- Axe 2 -->
+          <article class="glass glow-border flex flex-col rounded-3xl p-8">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-sm text-nova-400">AXE 02</span>
+              <span class="grid h-11 w-11 place-items-center rounded-xl bg-nova-500/15 text-nova-400">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" /></svg>
+              </span>
+            </div>
+            <h2 class="mt-6 text-2xl font-bold text-white">Le Référentiel Collaboratif</h2>
+            <p class="mt-1 text-sm font-medium text-nova-400">Capitaliser le savoir-faire</p>
+            <p class="mt-5 leading-relaxed text-slate-400">
+              Un repository template, ouvert à tous, dans lequel chaque collaborateur développe ses propres
+              <span class="text-slate-200">skills et prompts</span> pour répondre à ses besoins du quotidien.
+              C'est la transposition de la connaissance humaine vers des <span class="text-slate-200">agents IA adjonctifs</span>,
+              qui travaillent aux côtés des équipes.
+            </p>
+            <ul class="mt-6 space-y-2.5 text-sm text-slate-300">
+              <li class="flex gap-2.5"><span class="text-nova-400">▸</span>Un modèle prêt à l'emploi pour démarrer vite</li>
+              <li class="flex gap-2.5"><span class="text-nova-400">▸</span>Des skills versionnés, relus et partagés</li>
+              <li class="flex gap-2.5"><span class="text-nova-400">▸</span>Un savoir-faire réutilisable par tout le groupe</li>
+            </ul>
+            <p class="mt-auto pt-8 text-xs uppercase tracking-widest text-slate-500">Apport · L'expertise devient un actif commun</p>
+          </article>
+
+          <!-- Axe 3 -->
+          <article class="glass glow-border flex flex-col rounded-3xl p-8">
+            <div class="flex items-center justify-between">
+              <span class="font-mono text-sm text-leaf-400">AXE 03</span>
+              <span class="grid h-11 w-11 place-items-center rounded-xl bg-leaf-400/15 text-leaf-400">
+                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" /></svg>
+              </span>
+            </div>
+            <h2 class="mt-6 text-2xl font-bold text-white">Moteur d'inférence &amp; Observabilité</h2>
+            <p class="mt-1 text-sm font-medium text-leaf-400">Raisonner de façon fiable</p>
+            <p class="mt-5 leading-relaxed text-slate-400">
+              Un <span class="text-slate-200">modèle d'IA localisé</span>, qui garde nos données dans notre périmètre, combine
+              la base de connaissances et les skills pour produire ses réponses. Chaque interaction est
+              <span class="text-slate-200">tracée et évaluée</span> afin d'optimiser en continu les agents et les prompts.
+            </p>
+            <ul class="mt-6 space-y-2.5 text-sm text-slate-300">
+              <li class="flex gap-2.5"><span class="text-leaf-400">▸</span>Maîtrise et confidentialité des données</li>
+              <li class="flex gap-2.5"><span class="text-leaf-400">▸</span>Traçabilité de bout en bout des réponses</li>
+              <li class="flex gap-2.5"><span class="text-leaf-400">▸</span>Évaluation de la qualité et boucle d'amélioration</li>
+            </ul>
+            <p class="mt-auto pt-8 text-xs uppercase tracking-widest text-slate-500">Apport · Des agents qui progressent</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Schéma -->
+      <div class="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="text-sm font-semibold uppercase tracking-widest text-holo-400">La synergie</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">Une boucle vertueuse d'amélioration continue.</h2>
+          <p class="mt-5 text-lg leading-relaxed text-slate-400">
+            Les données donnent le <span class="text-slate-200">contexte</span>, les équipes apportent le <span class="text-slate-200">savoir-faire</span>,
+            le moteur <span class="text-slate-200">raisonne</span> et mesure la qualité de ses réponses. Chaque usage rend le système plus pertinent.
+          </p>
+        </div>
+
+        <figure class="glass mt-12 rounded-3xl p-4 sm:p-8">
+          <div id="diagram" class="overflow-x-auto" role="img" aria-label="Schéma de synergie entre le Collecteur, le Référentiel collaboratif et le Moteur d'inférence et d'observabilité">
+            <!-- Repli ASCII affiché si Mermaid ne peut pas être chargé -->
+<pre class="ascii mx-auto w-max font-mono text-[11px] text-slate-300 sm:text-[13px]">
+  <span class="text-slate-500">SOURCES DU SI</span>
+  ┌──────────────────┐                          ┌───────────────────────────────┐
+  │ Providers cloud  │                          │ <span class="text-holo-300">AXE 01 · LE COLLECTEUR</span>        │
+  │ Observabilité    │ ───────────────────────▶ │ Collecte continue             │
+  │ Bases de données │                          │        ▼                      │
+  │ Microservices    │                          │ <span class="text-holo-300">Base de connaissances</span>         │
+  └──────────────────┘                          └───────────────┬───────────────┘
+                                                                │ contexte
+  ┌──────────────────────────┐                  ┌───────────────▼───────────────┐
+  │ <span class="text-nova-400">AXE 02 · RÉFÉRENTIEL</span>     │   savoir-faire   │ <span class="text-leaf-400">AXE 03 · INFÉRENCE &amp; OBS.</span>     │
+  │ Expertise humaine        │ ───────────────▶ │ Modèle IA localisé            │
+  │ Skills et prompts        │                  │ Traçabilité et évaluation     │
+  └─────────────▲────────────┘                  └───────────────┬───────────────┘
+                │                                               ▼
+                │                               ╔═══════════════════════════════╗
+                │                               ║        <span class="text-white font-semibold">AGENTS HOLOCRON</span>        ║
+                │                               ║ analyser · comprendre ·       ║
+                │                               ║ suggérer · remédier           ║
+                │                               ╚═══════════════╤═══════════════╝
+                │                                               ▼
+                └────── amélioration continue ────── Équipes Produit et Ops
+</pre>
+          </div>
+          <figcaption class="mt-6 text-center text-sm text-slate-500">
+            Synergie des trois axes : le contexte et le savoir-faire nourrissent le moteur, dont l'évaluation améliore en retour les skills.
+          </figcaption>
+        </figure>
+
+        <!-- Principes -->
+        <div class="mt-16 grid gap-5 md:grid-cols-3">
+          <div class="rounded-2xl border border-white/10 p-6">
+            <p class="font-semibold text-white">Sécurité par conception</p>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">Aucun secret dans les référentiels, des accès alignés sur le référentiel produit du groupe : chacun ne voit que ce qui le concerne.</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 p-6">
+            <p class="font-semibold text-white">L'humain dans la boucle</p>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">Les agents analysent et proposent ; les équipes valident et décident. Chaque action reste explicable.</p>
+          </div>
+          <div class="rounded-2xl border border-white/10 p-6">
+            <p class="font-semibold text-white">Ouvert et évolutif</p>
+            <p class="mt-2 text-sm leading-relaxed text-slate-400">Une architecture modulaire : de nouvelles sources, de nouveaux skills et de nouveaux usages s'ajoutent sans tout reconstruire.</p>
+          </div>
+        </div>
+
+        <div class="mt-16 flex flex-col items-center gap-4 text-center">
+          <p class="text-lg text-slate-400">Vous avez une expertise à partager&nbsp;?</p>
+          <a href="#contribuer" class="inline-flex items-center gap-2 font-semibold text-holo-300 hover:text-holo-400">
+            Découvrir comment contribuer
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- PAGE 3 · CONTRIBUER                                                     -->
+    <!-- ===================================================================== -->
+    <section data-page="contribuer" data-title="Contribuer" aria-labelledby="contribuer-title" hidden>
+      <div class="mx-auto max-w-7xl px-5 pb-12 pt-20 lg:px-8 lg:pt-24">
+        <div class="max-w-3xl animate-fadeUp">
+          <p class="text-sm font-semibold uppercase tracking-widest text-holo-400">Contribuer</p>
+          <h1 id="contribuer-title" class="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            Vous êtes l'expert. <span class="text-gradient">Holocron est votre relais.</span>
+          </h1>
+          <p class="mt-6 text-lg leading-relaxed text-slate-400">
+            Ce diagnostic que vous refaites chaque semaine, cette procédure que vous êtes le seul à maîtriser, cette vérification
+            que vous aimeriez voir systématisée : c'est exactement ce dont Holocron a besoin.
+            <span class="text-slate-200">Vous pouvez participer dès aujourd'hui, à votre rythme.</span>
+          </p>
+        </div>
+      </div>
+
+      <!-- Étapes -->
+      <div class="mx-auto max-w-7xl px-5 pb-16 lg:px-8">
+        <ol class="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <li class="glass rounded-2xl p-7">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-holo-400/15 font-mono text-sm font-semibold text-holo-300">01</span>
+            <h2 class="mt-5 text-lg font-semibold text-white">Explorez</h2>
+            <p class="mt-2.5 text-sm leading-relaxed text-slate-400">Parcourez le repository des agents et découvrez les skills déjà disponibles. L'un d'eux répond peut-être déjà à votre besoin.</p>
+          </li>
+          <li class="glass rounded-2xl p-7">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-holo-400/15 font-mono text-sm font-semibold text-holo-300">02</span>
+            <h2 class="mt-5 text-lg font-semibold text-white">Référencez vos besoins</h2>
+            <p class="mt-2.5 text-sm leading-relaxed text-slate-400">Décrivez une tâche récurrente, un irritant ou un diagnostic à automatiser. Chaque besoin exprimé oriente les priorités du projet.</p>
+          </li>
+          <li class="glass rounded-2xl p-7">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-holo-400/15 font-mono text-sm font-semibold text-holo-300">03</span>
+            <h2 class="mt-5 text-lg font-semibold text-white">Créez votre skill</h2>
+            <p class="mt-2.5 text-sm leading-relaxed text-slate-400">Partez du modèle : décrivez la démarche, les garde-fous et quelques cas de test. Votre savoir-faire devient une compétence de l'agent.</p>
+          </li>
+          <li class="glass rounded-2xl p-7">
+            <span class="grid h-10 w-10 place-items-center rounded-full bg-holo-400/15 font-mono text-sm font-semibold text-holo-300">04</span>
+            <h2 class="mt-5 text-lg font-semibold text-white">Partagez</h2>
+            <p class="mt-2.5 text-sm leading-relaxed text-slate-400">Proposez votre contribution par pull request. Après relecture, elle profite à toutes les équipes du groupe.</p>
+          </li>
+        </ol>
+      </div>
+
+      <!-- CTA -->
+      <div class="mx-auto max-w-7xl px-5 py-12 lg:px-8">
+        <div class="relative overflow-hidden rounded-3xl border border-holo-400/30 bg-gradient-to-br from-holo-500/20 via-ink-800 to-nova-500/20 p-8 text-center sm:p-14">
+          <div class="pointer-events-none absolute -top-24 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-holo-400/20 blur-3xl"></div>
+          <div class="relative">
+            <h2 class="text-3xl font-bold tracking-tight text-white sm:text-4xl">Votre expertise d'aujourd'hui,<br class="hidden sm:block" /> l'agent de tous demain.</h2>
+            <p class="mx-auto mt-5 max-w-2xl text-lg leading-relaxed text-slate-300">
+              Dans le repository des agents, vous pouvez <strong class="text-white">développer vos skills</strong>,
+              <strong class="text-white">référencer vos besoins</strong> et déclarer les spécificités de votre périmètre.
+              Chaque contribution est partagée : le travail que vous faites aujourd'hui profitera demain à l'ensemble des utilisateurs du groupe.
+            </p>
+            <a href="https://github.com/20009266/holocron-agents" target="_blank" rel="noopener noreferrer"
+               class="mt-10 inline-flex items-center gap-3 rounded-2xl bg-white px-8 py-4 text-base font-bold text-ink-950 shadow-2xl shadow-holo-500/30 transition hover:-translate-y-0.5 hover:shadow-holo-400/50">
+              <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" clip-rule="evenodd" /></svg>
+              Accéder au Repository des Agents
+              <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H18v4.5M18 6l-7.5 7.5M10.5 6H6v12h12v-4.5" /></svg>
+            </a>
+            <p class="mt-4 text-xs text-slate-400">holocron-agents · Skills, agents et standards partagés</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Comprendre le modèle -->
+      <div class="mx-auto max-w-7xl px-5 py-16 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-sm font-semibold uppercase tracking-widest text-holo-400">Le modèle</p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl">Comment fonctionne le repository des agents&nbsp;?</h2>
+          <p class="mt-5 text-lg leading-relaxed text-slate-400">
+            Quatre briques simples, chacune avec un seul rôle. Pour vous, une seule chose compte :
+            <span class="text-slate-200">poser votre question</span>. Vous n'avez rien à préparer ni à fournir :
+            Holocron connaît déjà vos produits et apporte lui-même le contexte nécessaire.
+          </p>
+        </div>
+
+        <!-- 1. Les 4 briques -->
+        <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <article class="glass rounded-2xl p-6">
+            <p class="font-mono text-xs text-holo-400">BRIQUE 1</p>
+            <h3 class="mt-3 text-xl font-bold text-white">La commande</h3>
+            <p class="mt-1 text-sm font-medium text-holo-300">« Que veux-je faire ? »</p>
+            <p class="mt-4 text-sm leading-relaxed text-slate-400">Votre point d'entrée : une question en langage naturel, ou un raccourci d'intention valable pour toutes les pratiques.</p>
+            <div class="mt-4 flex flex-wrap gap-1.5 font-mono text-xs">
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">/diagnose</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">/audit</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">/review</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">/plan</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">/report</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">/remediate</span>
+            </div>
+          </article>
+          <article class="glass rounded-2xl p-6">
+            <p class="font-mono text-xs text-nova-400">BRIQUE 2</p>
+            <h3 class="mt-3 text-xl font-bold text-white">L'agent</h3>
+            <p class="mt-1 text-sm font-medium text-nova-400">« Avec quels droits ? »</p>
+            <p class="mt-4 text-sm leading-relaxed text-slate-400">Chaque agent a une posture et des droits définis. Tous sont en lecture seule, sauf <span class="text-slate-200">remediator</span>, qui n'agit qu'après votre confirmation.</p>
+            <div class="mt-4 flex flex-wrap gap-1.5 font-mono text-xs">
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">auditor</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">diagnostician</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">planner</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">reporter</span>
+              <span class="rounded-md bg-amber-400/10 px-2 py-1 text-amber-300">remediator</span>
+            </div>
+          </article>
+          <article class="glass rounded-2xl p-6">
+            <p class="font-mono text-xs text-leaf-400">BRIQUE 3</p>
+            <h3 class="mt-3 text-xl font-bold text-white">Le skill</h3>
+            <p class="mt-1 text-sm font-medium text-leaf-400">« Avec quelle expertise ? »</p>
+            <p class="mt-4 text-sm leading-relaxed text-slate-400">Le savoir-faire des équipes, écrit comme un runbook et rangé par pratique : FinOps, IaC, Résilience, Sécurité…</p>
+            <p class="mt-4 text-xs text-slate-500">C'est ici que <span class="text-slate-300">vous contribuez</span>.</p>
+          </article>
+          <article class="glass rounded-2xl border-amber-300/20 p-6">
+            <p class="font-mono text-xs text-amber-300">BRIQUE 4</p>
+            <h3 class="mt-3 text-xl font-bold text-white">La connaissance</h3>
+            <p class="mt-1 text-sm font-medium text-amber-300">« Sur quelles données et quelles règles ? »</p>
+            <p class="mt-4 text-sm leading-relaxed text-slate-400">
+              La <span class="text-slate-200">base de connaissances Holocron</span>, alimentée en continu par les collecteurs,
+              et les règles du groupe et de chaque périmètre. C'est elle qui évite de tout réexpliquer à l'agent.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-1.5 text-xs">
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">Inventaire</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">Observabilité</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">Code et IaC</span>
+              <span class="rounded-md bg-white/5 px-2 py-1 text-slate-200">Audits</span>
+              <span class="rounded-md bg-amber-400/10 px-2 py-1 text-amber-300">Standards</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- 2. Le parcours d'une demande -->
+        <div class="mt-20">
+          <h3 class="text-2xl font-bold text-white">Ce qui se passe quand vous posez une question</h3>
+          <p class="mt-3 max-w-3xl leading-relaxed text-slate-400">
+            Exemple : vous voulez savoir si le monitoring de votre produit est au niveau.
+            <span class="text-slate-200">Aucun fichier, aucun lien, aucune configuration à copier</span> : le nom du produit suffit.
+          </p>
+
+          <div class="mt-6 rounded-2xl border border-white/10 bg-ink-950/80 px-5 py-4 text-sm">
+            <span class="font-mono text-slate-500">vous &gt;</span>
+            <span class="text-slate-100">Est-ce que le monitoring de mon-produit est conforme&nbsp;?</span>
+          </div>
+
+          <ol class="mt-6 flex flex-col gap-3 lg:flex-row lg:items-stretch">
+            <li class="glass flex-1 rounded-2xl p-5">
+              <span class="font-mono text-xs text-holo-400">1 · COMPRENDRE</span>
+              <p class="mt-2 font-semibold text-white">L'agent identifie la demande</p>
+              <p class="mt-1.5 text-sm text-slate-400">Un produit, une pratique (Observabilité), une intention (audit). Il confie l'analyse à <span class="font-mono text-nova-400">auditor</span>.</p>
+            </li>
+            <svg class="hidden h-5 w-5 shrink-0 self-center text-slate-600 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            <li class="glass flex-1 rounded-2xl border-amber-300/30 p-5">
+              <span class="font-mono text-xs text-amber-300">2 · CONNAÎTRE</span>
+              <p class="mt-2 font-semibold text-white">Il interroge la base de connaissances</p>
+              <p class="mt-1.5 text-sm text-slate-400">Services du produit, monitors en place, derniers audits : tout est déjà collecté par Holocron, dans la limite de vos droits.</p>
+            </li>
+            <svg class="hidden h-5 w-5 shrink-0 self-center text-slate-600 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            <li class="glass flex-1 rounded-2xl p-5">
+              <span class="font-mono text-xs text-holo-400">3 · RÈGLES</span>
+              <p class="mt-2 font-semibold text-white">Il charge les règles du produit</p>
+              <p class="mt-1.5 text-sm text-slate-400">Les standards du groupe et les spécificités de sa plateforme, de son domaine ou du produit.</p>
+            </li>
+            <svg class="hidden h-5 w-5 shrink-0 self-center text-slate-600 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            <li class="glass flex-1 rounded-2xl p-5">
+              <span class="font-mono text-xs text-holo-400">4 · EXPERTISE</span>
+              <p class="mt-2 font-semibold text-white">Il applique le savoir-faire des équipes</p>
+              <p class="mt-1.5 font-mono text-xs text-leaf-400">holocron-observability-<wbr />monitor-coverage-<wbr />audit</p>
+              <p class="mt-1 text-xs text-slate-500">exemple de skill</p>
+            </li>
+            <svg class="hidden h-5 w-5 shrink-0 self-center text-slate-600 lg:block" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            <li class="glass flex-1 rounded-2xl border-holo-400/30 p-5">
+              <span class="font-mono text-xs text-holo-400">5 · RÉPONDRE</span>
+              <p class="mt-2 font-semibold text-white">Vous recevez un rapport</p>
+              <p class="mt-1.5 text-sm text-slate-400">Services sans monitor de latence, alertes sans runbook… avec preuves et corrections proposées. Rien n'est modifié.</p>
+            </li>
+          </ol>
+
+          <div class="mt-6 grid gap-4 md:grid-cols-2">
+            <div class="rounded-2xl border border-white/10 bg-white/[.02] p-5 text-sm">
+              <p class="font-semibold text-white">Ce que vous apportez</p>
+              <p class="mt-1.5 text-slate-400">Votre question, et votre jugement sur la réponse. C'est vous qui décidez de la suite.</p>
+            </div>
+            <div class="rounded-2xl border border-amber-300/20 bg-amber-400/5 p-5 text-sm">
+              <p class="font-semibold text-white">Ce que Holocron apporte</p>
+              <p class="mt-1.5 text-slate-400">Le contexte (base de connaissances), les règles (standards et périmètres) et la méthode (skills écrits par les équipes).</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Anatomie d'un skill -->
+        <div class="mt-20">
+          <h3 class="text-2xl font-bold text-white">À quoi ressemble un skill&nbsp;?</h3>
+          <p class="mt-3 max-w-3xl leading-relaxed text-slate-400">
+            Un petit dossier, lisible par tous. Si vous savez écrire un runbook, vous savez écrire un skill.
+          </p>
+
+          <div class="mt-8">
+            <!-- Contenu du dossier -->
+            <div class="glass min-w-0 rounded-3xl p-6 sm:p-8">
+              <p class="text-sm font-semibold uppercase tracking-widest text-slate-500">Ce qu'il contient</p>
+              <pre class="mt-6 overflow-x-auto font-mono text-sm leading-relaxed text-slate-300"><span class="text-slate-500">skills/</span><span class="text-holo-300">infra/</span><span class="text-slate-500">holocron-infra-deployment-review/</span>
+├── <span class="text-white">SKILL.md</span>           <span class="text-slate-500"># la démarche</span>
+├── checklist.md       <span class="text-slate-500"># les points à vérifier</span>
+└── evals/cases.yaml   <span class="text-slate-500"># des situations de test</span></pre>
+
+              <p class="mt-6 text-sm font-semibold text-white">Le fichier SKILL.md, en langage clair</p>
+              <ol class="mt-4 grid gap-2 text-sm sm:grid-cols-2 lg:grid-cols-4">
+                <li class="rounded-xl border border-white/10 bg-white/[.03] p-3"><span class="font-semibold text-white">Quand l'utiliser</span><br /><span class="text-slate-400">et quand ne pas l'utiliser</span></li>
+                <li class="rounded-xl border border-white/10 bg-white/[.03] p-3"><span class="font-semibold text-white">Démarche</span><br /><span class="text-slate-400">les étapes, comme un runbook</span></li>
+                <li class="rounded-xl border border-white/10 bg-white/[.03] p-3"><span class="font-semibold text-white">Garde-fous</span><br /><span class="text-slate-400">ce qui est interdit ou à confirmer</span></li>
+                <li class="rounded-xl border border-white/10 bg-white/[.03] p-3"><span class="font-semibold text-white">Format de sortie</span><br /><span class="text-slate-400">le rapport commun à tous</span></li>
+              </ol>
+              <div class="mt-4 rounded-xl border border-amber-400/20 bg-amber-400/5 p-3 text-sm">
+                <span class="font-semibold text-amber-300">Règle d'or :</span>
+                <span class="text-slate-300">jamais de valeur en dur. On écrit</span>
+                <span class="font-mono text-xs text-slate-200">infra.kubernetes.probes_required</span>,
+                <span class="text-slate-300">pas « readiness et liveness ».</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Cascade des périmètres -->
+        <div class="mt-20">
+          <h3 class="text-2xl font-bold text-white">Un même skill, des règles adaptées à chaque périmètre</h3>
+          <p class="mt-3 max-w-3xl leading-relaxed text-slate-400">
+            Les skills sont <span class="text-slate-200">génériques</span>. Les particularités d'une plateforme, d'un domaine ou d'un produit
+            sont déclarées à part et <span class="text-slate-200">héritées en cascade</span> : le niveau le plus précis l'emporte.
+            Personne n'a besoin de dupliquer un skill.
+          </p>
+
+          <div class="mt-8 grid gap-6 lg:grid-cols-2">
+            <div class="glass min-w-0 rounded-3xl p-6 sm:p-8">
+              <p class="text-sm text-slate-400">Exemple : seuil de latence <span class="font-mono text-xs text-slate-200">observability.latency.p95_ms</span></p>
+              <div class="mt-6 space-y-2.5">
+                <div class="flex items-center justify-between rounded-xl border border-white/10 bg-white/[.03] p-3.5">
+                  <span><span class="font-semibold text-white">Groupe</span> <span class="text-xs text-slate-500">standard commun</span></span>
+                  <span class="font-mono text-slate-400 line-through decoration-slate-500">500 ms</span>
+                </div>
+                <div class="ml-4 flex items-center justify-between rounded-xl border border-white/10 bg-white/[.03] p-3.5">
+                  <span><span class="font-semibold text-white">Plateforme</span> <span class="text-xs text-slate-500">rien de spécifique</span></span>
+                  <span class="text-xs text-slate-500">hérite</span>
+                </div>
+                <div class="ml-8 flex items-center justify-between rounded-xl border border-holo-400/40 bg-holo-400/10 p-3.5">
+                  <span><span class="font-semibold text-white">Domaine</span> <span class="text-xs text-holo-300">« traitements batch nocturnes »</span></span>
+                  <span class="font-mono font-semibold text-holo-300">800 ms</span>
+                </div>
+                <div class="ml-12 flex items-center justify-between rounded-xl border border-white/10 bg-white/[.03] p-3.5">
+                  <span><span class="font-semibold text-white">Produit</span> <span class="text-xs text-slate-500">rien de spécifique</span></span>
+                  <span class="text-xs text-slate-500">hérite</span>
+                </div>
+              </div>
+              <p class="mt-6 rounded-xl bg-ink-950/80 p-4 text-sm text-slate-300">
+                ➜ L'agent applique <span class="font-mono font-semibold text-holo-300">800 ms</span> au produit et l'explique :
+                <span class="italic text-slate-400">« seuil défini au niveau du domaine »</span>.
+              </p>
+            </div>
+
+            <div class="glass min-w-0 rounded-3xl p-6 sm:p-8">
+              <p class="text-sm font-semibold uppercase tracking-widest text-slate-500">Où déclarer une particularité ?</p>
+              <div class="mt-6 overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                  <thead class="text-xs uppercase tracking-wider text-slate-500">
+                    <tr><th class="pb-3 pr-4 font-medium">Ce qui diffère</th><th class="pb-3 font-medium">Où</th></tr>
+                  </thead>
+                  <tbody class="divide-y divide-white/5">
+                    <tr><td class="py-3 pr-4 text-slate-200">Une valeur<br /><span class="text-xs text-slate-500">seuil, convention, canal d'alerte</span></td><td class="py-3 font-mono text-xs text-holo-300">standards.yaml</td></tr>
+                    <tr><td class="py-3 pr-4 text-slate-200">Un écart assumé<br /><span class="text-xs text-slate-500">temporaire, approuvé, 12 mois max</span></td><td class="py-3 font-mono text-xs text-holo-300">exceptions.yaml</td></tr>
+                    <tr><td class="py-3 pr-4 text-slate-200">Un contexte<br /><span class="text-xs text-slate-500">architecture, dépendances, runbook</span></td><td class="py-3 font-mono text-xs text-holo-300">knowledge/</td></tr>
+                    <tr><td class="py-3 pr-4 text-slate-200">Une démarche propre<br /><span class="text-xs text-slate-500">procédure unique à ce périmètre</span></td><td class="py-3 font-mono text-xs text-holo-300">skill spécifique</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <p class="mt-5 text-xs leading-relaxed text-slate-500">
+                Tout se range dans <span class="break-all font-mono text-slate-400">scopes/&lt;plateforme&gt;/&lt;domaine&gt;/&lt;produit&gt;/</span>.
+                Une même particularité retrouvée dans trois périmètres devient un standard du groupe.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5. Les pratiques -->
+        <div class="mt-20">
+          <h3 class="text-2xl font-bold text-white">12 pratiques pour couvrir tout l'opérationnel</h3>
+          <p class="mt-3 max-w-3xl leading-relaxed text-slate-400">Chaque pratique a son dossier, son équipe propriétaire et ses standards. Trouvez la vôtre.</p>
+          <div class="mt-6 flex flex-wrap gap-2 text-sm">
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">Observabilité</span>
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">FinOps</span>
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">Infrastructure</span>
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">Infrastructure as Code</span>
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">Résilience</span>
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">Sécurité</span>
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">Data</span>
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">Delivery</span>
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">Incident</span>
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">Process</span>
+            <span class="rounded-full border border-white/10 bg-white/[.03] px-3.5 py-1.5 text-slate-200">IA</span>
+            <span class="rounded-full border border-holo-400/30 bg-holo-400/10 px-3.5 py-1.5 text-holo-300">Socle Holocron</span>
+          </div>
+        </div>
+
+        <!-- 6. Créer son skill -->
+        <div class="mt-20 glass glow-border rounded-3xl p-6 sm:p-10">
+          <h3 class="text-2xl font-bold text-white">Créer votre skill en trois temps</h3>
+          <div class="mt-8 grid gap-6 lg:grid-cols-3">
+            <div class="min-w-0">
+              <p class="font-mono text-xs text-holo-400">1 · DÉCRIRE</p>
+              <p class="mt-2 text-sm text-slate-400">L'assistant vous pose les bonnes questions et crée les fichiers.</p>
+              <pre class="mt-3 overflow-x-auto rounded-xl bg-ink-950/80 p-3 font-mono text-xs text-slate-200">/new-skill vérifier les sondes K8s</pre>
+            </div>
+            <div class="min-w-0">
+              <p class="font-mono text-xs text-holo-400">2 · VÉRIFIER</p>
+              <p class="mt-2 text-sm text-slate-400">Un contrôle automatique signale ce qui manque, en clair.</p>
+              <pre class="mt-3 overflow-x-auto rounded-xl bg-ink-950/80 p-3 font-mono text-xs text-slate-200">python3 tools/validate.py</pre>
+            </div>
+            <div class="min-w-0">
+              <p class="font-mono text-xs text-holo-400">3 · PARTAGER</p>
+              <p class="mt-2 text-sm text-slate-400">Une Pull Request, relue par l'équipe de la pratique, puis disponible pour tous.</p>
+              <pre class="mt-3 overflow-x-auto rounded-xl bg-ink-950/80 p-3 font-mono text-xs text-slate-200">git push · Pull Request</pre>
+            </div>
+          </div>
+          <p class="mt-8 text-sm text-slate-400">
+            Pas à l'aise avec Git&nbsp;? Tout peut aussi se faire depuis l'interface GitHub, ou simplement en
+            <span class="text-slate-200">exprimant un besoin</span> dans une issue.
+            <a href="https://github.com/20009266/holocron-agents/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" class="ml-1 font-semibold text-holo-300 hover:text-holo-400">Lire le guide de contribution →</a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- PAGE 4 · ARCHITECTURE (À venir)                                         -->
+    <!-- ===================================================================== -->
+    <section data-page="architecture" data-title="Architecture" aria-labelledby="architecture-title" hidden>
+      <div class="mx-auto max-w-4xl px-5 py-24 text-center lg:px-8 lg:py-32">
+        <div class="animate-fadeUp">
+          <span class="inline-flex items-center gap-2 rounded-full border border-amber-400/30 bg-amber-400/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-amber-300">
+            <span class="h-1.5 w-1.5 rounded-full bg-amber-300 animate-pulseGlow"></span>
+            À venir
+          </span>
+          <h1 id="architecture-title" class="mt-8 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">Architecture</h1>
+          <p class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-slate-400">
+            Nous préparons une présentation détaillée de l'architecture technique d'Holocron.
+            Elle sera publiée ici très prochainement.
+          </p>
+        </div>
+        <div class="mt-14 grid gap-4 text-left sm:grid-cols-2">
+          <div class="glass rounded-2xl p-6">
+            <p class="font-semibold text-white">Composants</p>
+            <p class="mt-1.5 text-sm text-slate-400">Collecteurs, API centrale, interface web et agent local.</p>
+          </div>
+          <div class="glass rounded-2xl p-6">
+            <p class="font-semibold text-white">Flux de données</p>
+            <p class="mt-1.5 text-sm text-slate-400">De la collecte des sources jusqu'à la réponse de l'agent.</p>
+          </div>
+          <div class="glass rounded-2xl p-6">
+            <p class="font-semibold text-white">Sécurité et autorisations</p>
+            <p class="mt-1.5 text-sm text-slate-400">Authentification, droits par produit et gestion des secrets.</p>
+          </div>
+          <div class="glass rounded-2xl p-6">
+            <p class="font-semibold text-white">Déploiement et exploitation</p>
+            <p class="mt-1.5 text-sm text-slate-400">Environnements, observabilité et cycle de vie.</p>
+          </div>
+        </div>
+        <a href="#conception" class="mt-12 inline-flex items-center gap-2 font-semibold text-holo-300 hover:text-holo-400">
+          En attendant, découvrez la conception
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- PAGE 5 · ROADMAP                                                       -->
+    <!-- ===================================================================== -->
+    <section data-page="roadmap" data-title="Roadmap" aria-labelledby="roadmap-title" hidden>
+      <div class="mx-auto max-w-7xl px-5 pb-10 pt-20 lg:px-8 lg:pt-24">
+        <div class="max-w-3xl animate-fadeUp">
+          <p class="text-sm font-semibold uppercase tracking-widest text-holo-400">Roadmap</p>
+          <h1 id="roadmap-title" class="mt-3 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+            Une feuille de route <span class="text-gradient">réaliste</span>, construite pas à pas.
+          </h1>
+          <p class="mt-6 text-lg leading-relaxed text-slate-400">
+            Le cadrage est terminé : besoin, R&amp;D, conception et présentation. Holocron entre en
+            <span class="text-slate-200">phase de réalisation</span>, avec un rythme pensé pour une équipe qui y consacre
+            une partie de son temps. Chaque trimestre se termine par une démonstration concrète.
+          </p>
+          <p class="mt-4 text-sm text-slate-500">Mise à jour : 2 octobre 2026 · Sprint 2 en cours</p>
+        </div>
+      </div>
+
+      <!-- Capacité -->
+      <div class="mx-auto max-w-7xl px-5 pb-16 lg:px-8">
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div class="glass rounded-2xl p-5"><p class="text-3xl font-bold text-white">6</p><p class="mt-1 text-sm text-slate-400">personnes dans l'équipe projet</p></div>
+          <div class="glass rounded-2xl p-5"><p class="text-3xl font-bold text-white">4 à 5 h</p><p class="mt-1 text-sm text-slate-400">par personne et par sprint de 2 semaines</p></div>
+          <div class="glass rounded-2xl p-5"><p class="text-3xl font-bold text-white">≈ 3,5 j</p><p class="mt-1 text-sm text-slate-400">de travail d'équipe par sprint (24 à 30 h)</p></div>
+          <div class="glass rounded-2xl p-5"><p class="text-3xl font-bold text-white">≈ 20 j</p><p class="mt-1 text-sm text-slate-400">de travail d'équipe par trimestre</p></div>
+        </div>
+        <div class="mt-4 grid gap-3 text-sm md:grid-cols-3">
+          <p class="rounded-xl border border-white/10 bg-white/[.02] p-4 text-slate-400"><span class="font-semibold text-white">2 à 3 sujets par sprint, pas plus.</span> Mieux vaut finir que commencer.</p>
+          <p class="rounded-xl border border-white/10 bg-white/[.02] p-4 text-slate-400"><span class="font-semibold text-white">Étudier avant d'investir.</span> Chaque brique passe par une étude ou un POC.</p>
+          <p class="rounded-xl border border-white/10 bg-white/[.02] p-4 text-slate-400"><span class="font-semibold text-white">Une démo par trimestre.</span> Des résultats visibles, régulièrement.</p>
+        </div>
+      </div>
+
+      <!-- Phases -->
+      <div class="mx-auto max-w-7xl px-5 pb-16 lg:px-8">
+        <h2 class="text-2xl font-bold text-white">Les grandes étapes</h2>
+        <ol class="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+          <li class="glass rounded-2xl p-5">
+            <div class="flex items-center justify-between gap-2"><span class="font-mono text-sm font-semibold text-white">Q3 2026</span><span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider border-leaf-400/30 bg-leaf-400/10 text-leaf-400">Terminé</span></div>
+            <p class="mt-3 font-semibold text-white">Cadrage</p>
+            <p class="mt-1 text-xs text-slate-500">15 → 30 sept. · Sprint 1</p>
+          </li>
+          <li class="glass rounded-2xl p-5 border-holo-400/50 bg-holo-400/5">
+            <div class="flex items-center justify-between gap-2"><span class="font-mono text-sm font-semibold text-white">Q4 2026</span><span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider border-holo-400/40 bg-holo-400/10 text-holo-300">En cours</span></div>
+            <p class="mt-3 font-semibold text-white">Réalisation · Fondations</p>
+            <p class="mt-1 text-xs text-slate-500">1er oct. → 18 déc. · Sprints 2 à 7</p><p class="mt-3 text-xs font-semibold text-holo-300">● Nous sommes ici</p>
+          </li>
+          <li class="glass rounded-2xl p-5">
+            <div class="flex items-center justify-between gap-2"><span class="font-mono text-sm font-semibold text-white">Q1 2027</span><span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider border-white/10 bg-white/5 text-slate-400">Planifié</span></div>
+            <p class="mt-3 font-semibold text-white">Premiers usages</p>
+            <p class="mt-1 text-xs text-slate-500">4 janv. → 9 avr. · Sprints 8 à 14</p>
+          </li>
+          <li class="glass rounded-2xl p-5">
+            <div class="flex items-center justify-between gap-2"><span class="font-mono text-sm font-semibold text-white">Q2 2027</span><span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider border-white/10 bg-white/5 text-slate-400">Planifié</span></div>
+            <p class="mt-3 font-semibold text-white">Extension</p>
+            <p class="mt-1 text-xs text-slate-500">12 avr. → 2 juil. · Sprints 15 à 20</p>
+          </li>
+          <li class="glass rounded-2xl p-5">
+            <div class="flex items-center justify-between gap-2"><span class="font-mono text-sm font-semibold text-white">Q3 2027</span><span class="inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider border-white/10 bg-white/5 text-slate-400">Horizon</span></div>
+            <p class="mt-3 font-semibold text-white">Généralisation</p>
+            <p class="mt-1 text-xs text-slate-500">5 juil. → 8 oct. · Sprints 21 à 27</p>
+          </li>
+        </ol>
+      </div>
+
+      <!-- Vision par trimestre -->
+      <div class="mx-auto max-w-7xl px-5 pb-16 lg:px-8">
+        <h2 class="text-2xl font-bold text-white">Vision par trimestre</h2>
+        <p class="mt-3 max-w-3xl leading-relaxed text-slate-400">Six chantiers menés en parallèle, à petits pas. Chaque ligne montre la progression d'un chantier, de l'étude à la mise en service.</p>
+        <div class="mt-4 flex flex-wrap gap-4 text-xs text-slate-400">
+          <span><span class="text-leaf-400">✓</span> Réalisé</span><span><span class="text-holo-300">◐</span> En cours</span><span><span class="text-slate-500">○</span> Planifié</span>
+        </div>
+        <div class="glass mt-6 overflow-x-auto rounded-3xl">
+          <table class="w-full min-w-[1080px] border-collapse text-left text-sm">
+            <thead>
+              <tr class="border-b border-white/10">
+                <th class="w-64 p-4 text-xs font-semibold uppercase tracking-wider text-slate-500">Chantier</th>
+                <th class="p-4 font-mono text-sm font-semibold text-slate-300">Q3 2026<span class="mt-0.5 block font-sans text-xs font-normal text-slate-500">Cadrage</span></th>
+                <th class="p-4 font-mono text-sm font-semibold bg-holo-400/10 text-holo-300">Q4 2026<span class="mt-0.5 block font-sans text-xs font-normal text-slate-500">Réalisation · Fondations</span></th>
+                <th class="p-4 font-mono text-sm font-semibold text-slate-300">Q1 2027<span class="mt-0.5 block font-sans text-xs font-normal text-slate-500">Premiers usages</span></th>
+                <th class="p-4 font-mono text-sm font-semibold text-slate-300">Q2 2027<span class="mt-0.5 block font-sans text-xs font-normal text-slate-500">Extension</span></th>
+                <th class="p-4 font-mono text-sm font-semibold text-slate-300">Q3 2027<span class="mt-0.5 block font-sans text-xs font-normal text-slate-500">Généralisation</span></th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-white/5">
+              <tr class="align-top">
+                <th scope="row" class="p-4 font-normal"><span class="flex items-center gap-2 font-semibold text-white"><span class="h-2.5 w-2.5 shrink-0 rounded-full bg-slate-300"></span>Cadrage, pilotage et adoption</span><span class="mt-1 block text-xs leading-relaxed text-slate-500">Donner le cap, montrer les résultats, embarquer les équipes.</span></th>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-leaf-400">✓</span></span><span class="text-slate-200">Définition du besoin</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-leaf-400">✓</span></span><span class="text-slate-200">R&amp;D</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-leaf-400">✓</span></span><span class="text-slate-200">Conception (3 axes)</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-leaf-400">✓</span></span><span class="text-slate-200">Présentation : site vitrine</span></li></ul></td>
+                <td class="p-4 bg-holo-400/[.04]"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-holo-300">◐</span></span><span class="text-slate-200">Organisation et rituels de l&#x27;équipe</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Démo de fin de trimestre</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Pilote avec 2 à 3 équipes produit</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Démo du pilote</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Ouverture à d&#x27;autres plateformes</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Ateliers de contribution</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Mesure de la valeur (temps gagné, adoption)</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Bilan et roadmap 2028</span></li></ul></td>
+              </tr>
+              <tr class="align-top">
+                <th scope="row" class="p-4 font-normal"><span class="flex items-center gap-2 font-semibold text-white"><span class="h-2.5 w-2.5 shrink-0 rounded-full bg-holo-400"></span>Repository collaboratif des agents</span><span class="mt-1 block text-xs leading-relaxed text-slate-500">Le référentiel où chaque équipe transforme son savoir-faire en skills.</span></th>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-leaf-400">✓</span></span><span class="text-slate-200">Conception du modèle : pratiques, périmètres, skills</span></li></ul></td>
+                <td class="p-4 bg-holo-400/[.04]"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-leaf-400">✓</span></span><span class="text-slate-200">Socle livré : structure, outils, CI, guide</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-holo-300">◐</span></span><span class="text-slate-200">Propriétaires et standards validés</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">3 premiers skills métier</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">5 à 8 skills en usage</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Premiers périmètres déclarés</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Premiers skills de remédiation encadrés</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Nouvelles pratiques dans l&#x27;API</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Skills les plus utilisés en « stable »</span></li></ul></td>
+              </tr>
+              <tr class="align-top">
+                <th scope="row" class="p-4 font-normal"><span class="flex items-center gap-2 font-semibold text-white"><span class="h-2.5 w-2.5 shrink-0 rounded-full bg-nova-400"></span>Modèle IA</span><span class="mt-1 block text-xs leading-relaxed text-slate-500">Choisir et mettre à disposition un modèle localisé, maîtrisé et adapté à nos usages.</span></th>
+                <td class="p-4 text-slate-600">—</td>
+                <td class="p-4 bg-holo-400/[.04]"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Étude : critères et short-list</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Benchmark sur les cas de test</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Décision et note de choix</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Mise à disposition du modèle retenu (hébergement localisé)</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Optimisation coût et performance</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Réévaluation annuelle du choix</span></li></ul></td>
+              </tr>
+              <tr class="align-top">
+                <th scope="row" class="p-4 font-normal"><span class="flex items-center gap-2 font-semibold text-white"><span class="h-2.5 w-2.5 shrink-0 rounded-full bg-leaf-400"></span>Observabilité des agents</span><span class="mt-1 block text-xs leading-relaxed text-slate-500">Tracer et évaluer chaque réponse pour améliorer les agents (type Opik).</span></th>
+                <td class="p-4 text-slate-600">—</td>
+                <td class="p-4 bg-holo-400/[.04]"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Étude comparative (Opik, Langfuse, Phoenix)</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">POC : traces des sessions</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Mise en service</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Évaluation automatique des cas de test</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Boucle d&#x27;amélioration continue des skills</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Indicateurs de qualité dans le pilotage</span></li></ul></td>
+              </tr>
+              <tr class="align-top">
+                <th scope="row" class="p-4 font-normal"><span class="flex items-center gap-2 font-semibold text-white"><span class="h-2.5 w-2.5 shrink-0 rounded-full bg-amber-300"></span>Connaissance et RAG</span><span class="mt-1 block text-xs leading-relaxed text-slate-500">Donner aux agents l&#x27;accès aux savoir-faire et aux documentations.</span></th>
+                <td class="p-4 text-slate-600">—</td>
+                <td class="p-4 bg-holo-400/[.04]"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Cadrage des sources (fin de trimestre)</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Étude d&#x27;enrichissement : runbooks, documentation</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">POC sur une pratique</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Mise en service pour les pratiques pilotes</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Extension à d&#x27;autres pratiques</span></li></ul></td>
+              </tr>
+              <tr class="align-top">
+                <th scope="row" class="p-4 font-normal"><span class="flex items-center gap-2 font-semibold text-white"><span class="h-2.5 w-2.5 shrink-0 rounded-full bg-sky-400"></span>Moteur de données et collecteurs</span><span class="mt-1 block text-xs leading-relaxed text-slate-500">La base de connaissances Holocron, alimentée par des collecteurs spécifiques.</span></th>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-leaf-400">✓</span></span><span class="text-slate-200">R&amp;D : premiers collecteurs et API</span></li></ul></td>
+                <td class="p-4 bg-holo-400/[.04]"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Inventaire des sources</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Conception du modèle de données v1</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Modèle v1 en base</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Premier collecteur spécifique</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">2 à 3 collecteurs supplémentaires</span></li><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Historisation</span></li></ul></td>
+                <td class="p-4"><ul class="space-y-1.5 text-[13px] leading-snug"><li class="flex gap-2"><span class="shrink-0"><span class="text-slate-500">○</span></span><span class="text-slate-400">Vues Plateforme, Domaine, Produit consolidées</span></li></ul></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Influence -->
+      <div class="mx-auto max-w-7xl px-5 pb-24 lg:px-8">
+        <div class="glass glow-border mx-auto max-w-3xl rounded-3xl p-8 text-center">
+          <p class="text-lg font-semibold text-white">Influencez la roadmap</p>
+          <p class="mt-2 text-slate-400">Les besoins référencés par les équipes opérationnelles servent directement à prioriser les prochains sprints.</p>
+          <a href="#contribuer" class="mt-6 inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-holo-400 to-nova-500 px-6 py-3 text-sm font-semibold text-ink-950 transition hover:brightness-110">
+            Référencer un besoin
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-6-6 6 6-6 6" /></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="border-t border-white/5">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-5 py-10 text-sm text-slate-500 sm:flex-row lg:px-8">
+      <p><span class="font-semibold text-slate-300">Holocron</span> · Excellence opérationnelle augmentée par l'IA</p>
+      <p>ADEO · Projet interne · <span id="year"></span></p>
+    </div>
+  </footer>
+
+  <!-- Source du schéma Mermaid (lue par le script ci-dessous) -->
+  <script type="text/plain" id="diagram-src">
+flowchart TB
+  SRC["Providers cloud · Observabilité<br/>Bases de données · Microservices"]
+  C["<b>① Le Collecteur</b><br/>collecte continue et normalisation"]
+  KB[("Base de connaissances<br/>modèle centralisé")]
+  H["Expertise des équipes<br/>runbooks, savoir-faire"]
+  SK["<b>② Référentiel collaboratif</b><br/>skills et prompts partagés"]
+  LLM["<b>③ Moteur d'inférence</b><br/>modèle IA localisé"]
+  EV["Traçabilité<br/>et évaluation"]
+  AG{{"<b>Agents Holocron</b><br/>analyser · comprendre · suggérer · remédier"}}
+  U["Équipes Produit et Ops"]
+
+  SRC --> C --> KB
+  H --> SK
+  KB -- "contexte" --> LLM
+  SK -- "savoir-faire" --> LLM
+  LLM --> EV
+  LLM ==> AG ==> U
+  EV -. "amélioration continue" .-> SK
+
+  classDef src fill:#111a2e,stroke:#475569,color:#cbd5e1
+  classDef ax1 fill:#082f3a,stroke:#22d3ee,color:#e0f7fb
+  classDef ax2 fill:#1e1640,stroke:#a78bfa,color:#ede9fe
+  classDef ax3 fill:#0b2a1a,stroke:#4ade80,color:#dcfce7
+  classDef agent fill:#22d3ee,stroke:#7ee7f7,color:#060a14
+  classDef team fill:#0b1220,stroke:#94a3b8,color:#f1f5f9
+  class SRC src
+  class C,KB ax1
+  class H,SK ax2
+  class LLM,EV ax3
+  class AG agent
+  class U team
+  </script>
+
+  <!-- Navigation : pages simulées via le hash de l'URL -->
+  <script>
+    (() => {
+      const pages = [...document.querySelectorAll('[data-page]')];
+      const links = [...document.querySelectorAll('[data-nav]')];
+      const menu = document.getElementById('mobile-menu');
+      const toggle = document.getElementById('menu-toggle');
+      const fallback = 'pourquoi';
+
+      function show(id) {
+        if (!pages.some((p) => p.dataset.page === id)) id = fallback;
+        pages.forEach((p) => { p.hidden = p.dataset.page !== id; });
+        links.forEach((l) => {
+          const active = l.dataset.nav === id;
+          l.classList.toggle('is-active', active);
+          if (active) l.setAttribute('aria-current', 'page'); else l.removeAttribute('aria-current');
+        });
+        const page = pages.find((p) => p.dataset.page === id);
+        document.title = `${page.dataset.title} · Holocron`;
+        menu.classList.add('hidden');
+        toggle.setAttribute('aria-expanded', 'false');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+
+      toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('hidden') === false;
+        toggle.setAttribute('aria-expanded', String(open));
+      });
+
+      window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+      show(location.hash.slice(1));
+      document.getElementById('year').textContent = new Date().getFullYear();
+    })();
+  </script>
+
+  <!-- Rendu du schéma Mermaid (le repli ASCII reste affiché en cas d'échec) -->
+  <script type="module">
+    try {
+      const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: 'strict',
+        theme: 'base',
+        fontFamily: 'Inter, ui-sans-serif, system-ui, sans-serif',
+        flowchart: { curve: 'basis', padding: 16, nodeSpacing: 40, rankSpacing: 60 },
+        themeVariables: {
+          darkMode: true,
+          background: 'transparent',
+          primaryColor: '#111a2e',
+          primaryTextColor: '#e2e8f0',
+          primaryBorderColor: '#22d3ee',
+          lineColor: '#64748b',
+          edgeLabelBackground: '#0b1220',
+          clusterBkg: '#0b1220',
+          clusterBorder: '#334155',
+          fontSize: '14px',
+        },
+      });
+      const source = document.getElementById('diagram-src').textContent;
+      const { svg } = await mermaid.render('holocron-synergie', source);
+      document.getElementById('diagram').innerHTML = svg;
+    } catch (error) {
+      console.warn('Mermaid indisponible, affichage du schéma ASCII.', error);
+    }
+  </script>
+</body>
+</html>
