@@ -7,8 +7,6 @@ Process Management).
 Le site tient dans un fichier statique, [`index.html`](./index.html), accompagné de son icône [`favicon.svg`](./favicon.svg) :
 
 - **Tailwind CSS** (CDN) pour le style ;
-- **Mermaid.js** (CDN) pour le schéma de conception, avec un repli ASCII si le
-  CDN n'est pas accessible ;
 - une navigation par ancres (`#pourquoi`, `#conception`, `#contribuer`,
   `#architecture`, `#roadmap`) qui simule plusieurs pages.
 
